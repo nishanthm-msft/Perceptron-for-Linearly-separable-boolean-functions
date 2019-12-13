@@ -1,0 +1,109 @@
+#Artificial Neurons
+*The artificial neuron receives one or more inputs and sums them to produce an output. 
+*Usually each input is separately weighted and the sum is passed through a nonlinear function known as an activation function or 
+transfer function. 
+*Specifically, in an ANN (Artificial Neural Network) we do the sum of products of inputs and their corresponding weights and apply 
+an activation function to it get the output of that layer and feed it as input to the next layer.
+*The main purpose of an activation function in an ANN is to convert an input signal of a node in an ANN to an output signal. 
+*The activation function makes the neural network more powerful and adds ability to it to learn complex and complicated data set and
+represent non-linear complex arbitrary functional mappings between inputs and outputs.
+
+#CODE SNIPPET FOR AN “AND” PERCEPTRON USING PYTHON :-
+import random
+def eval(x0,x1,x2,w0,w1,w2):
+    y=((w0*x0)+(w1*x1)+(w2*x2))
+    if y>=0:
+        z=1
+    else:
+        z=0
+    return z
+pset=[(1,1)]
+nset=[(0,0),(0,1),(1,0)]
+actual=-1
+x0=1
+x1=int(input("Enter value of x1 \n"))
+x2=int(input("Enter value of x2  \n"))
+y1=(x1,x2)
+if y1 in pset:
+    actual=1
+else:
+    actual=0
+w0=11
+w1=-8
+w2=7
+print("Before learning weights : ",w0,w1,w2)
+guess = eval(x0, x1, x2, w0, w1, w2)
+error = actual - guess
+while True:
+  if error == 0:
+     break
+  else:
+     while True:
+         if y1 in pset and guess <= 0:
+             w0=w0+x0
+             w1=w1+x1
+             w2=w2+x2
+         elif y1 in nset and guess > 0:
+             w0=w0-x0
+             w1=w1-x1
+             w2=w2-x2
+         guess = eval(x0, x1, x2, w0, w1, w2)
+         error = actual - guess
+         if error == 0:
+             break
+print("After learning W0 , W1 , W2 are : ",w0,w1,w2)
+ans= eval(x0, x1, x2, w0, w1, w2)
+print("Output after learning : ",ans)
+
+#WEIGHT ADAPTATION THROUGH THE LEARNING ALGORITHM :-
+wi+1= wi+nXi
+wi+1= wi-nXi
+
+#CODE SNIPPET FOR AN “OR” PERCEPTRON USING PYTHON :-
+import random
+def eval(x0,x1,x2,w0,w1,w2):
+   y=((w0*x0)+(w1*x1)+(w2*x2))
+   if y>=0:
+       z=1
+   else:
+       z=0
+   return z
+pset=[(1,1),(0,1),(1,0)]
+nset=[(0,0)]
+actual=-1
+x0=1
+x1=int(input("Enter value of x1 \n"))
+x2=int(input("Enter value of x2  \n"))
+y1=(x1,x2)
+if y1 in pset:
+   actual=1
+else:
+   actual=0
+w0=random.randint(-1,1)
+w1=random.randint(-1,1)
+w2=random.randint(-1,1)
+print("Before learning weights : ",w0,w1,w2)
+guess = eval(x0, x1, x2, w0, w1, w2)
+print("Output before learning : ",guess)
+error = actual - guess
+while True:
+ if error == 0:
+    break
+ else:
+    while True:
+        if y1 in pset and guess <= 0:
+            w0=w0+x0
+            w1=w1+x1
+            w2=w2+x2
+        elif y1 in nset and guess > 0:
+            w0=w0-x0
+            w1=w1-x1
+            w2=w2-x2
+        guess = eval(x0, x1, x2, w0, w1, w2)
+        error = actual - guess
+        if error == 0:
+            break
+print("After learning W0 , W1 , W2 are : ",w0,w1,w2)
+ans= eval(x0, x1, x2, w0, w1, w2)
+print("Output after learning : ",ans)
+
